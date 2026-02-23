@@ -1,26 +1,87 @@
+/* 1. Import Tailwind CSS (this is the only required import in v4+) */
 @import "tailwindcss";
 
+/* 2. Define CSS variables for light/dark mode (using modern color spaces is optional but nice) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Optional: more semantic variables (very common in 2025+ projects) */
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --primary: #2563eb;        /* blue-600 – good accent for bakery app */
+  --primary-foreground: #ffffff;
+  --secondary: #f3f4f6;      /* gray-100 */
+  --secondary-foreground: #111827;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --accent: #f59e0b;         /* amber-500 – warm, bakery-friendly */
+  --accent-foreground: #111827;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #2563eb;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* Dark mode overrides */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    --card: #111111;
+    --card-foreground: #ededed;
+    --popover: #111111;
+    --popover-foreground: #ededed;
+    --primary: #3b82f6;        /* blue-500 */
+    --primary-foreground: #ffffff;
+    --secondary: #1f2937;      /* gray-800 */
+    --secondary-foreground: #f3f4f6;
+    --muted: #1f2937;
+    --muted-foreground: #9ca3af;
+    --accent: #fbbf24;         /* amber-400 */
+    --accent-foreground: #111827;
+    --destructive: #f87171;
+    --destructive-foreground: #ffffff;
+    --border: #374151;
+    --input: #374151;
+    --ring: #3b82f6;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 4. Global resets / base styles */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    /* Use a clean, modern system font stack (override Geist if you didn't install it) */
+    font-family: system-ui, -apple-system, BlinkMacOSystemFont, "Segoe UI", Roboto, sans-serif;
+    /* Prevent layout shift & improve text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    min-height: 100dvh;
+  }
+
+  /* Optional: better default box-sizing & smooth scrolling */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* 5. Optional: Custom utility classes (add later as needed) */
+@layer utilities {
+  /* Example: bakery-themed gradient background */
+  .bg-bakery-gradient {
+    background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+  }
 }
